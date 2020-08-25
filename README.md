@@ -29,6 +29,52 @@ The subdirectory `docker-database` contains prepared Windows batches:
 - `04-exec-connection-to-database-testuser.cmd` - executes the **mysql cli** terminal into running database container (as the user *testuser*)
 - `containers.cmd` - lists currently running containers and list of all existing containers
 
+### 3. Preparing the database
+For the connection to the database use either the **mysql cli** terminal or the Adminer container on [http://localhost:8080](http://localhost:8080)
+
+#### Connection using Adminer container
+User *root* (default password *R00tPa33w0rd!*)
+
+![user root configuration](adminer.root.png)
+
+User *testuser* (default password *T3stUs3r!*)
+
+![user testuser configuration](adminer.testuser.png)
+
+#### SQL lines for root
+```sql
+SET NAMES utf8;
+
+CREATE USER `testuser` IDENTIFIED BY 'T3stUs3r!';
+CREATE DATABASE `testdb`;
+GRANT ALL PRIVILEGES ON `testdb`.* TO `testuser`@`%`;
+```
+
+#### SQL lines for testuser
+```sql
+SET NAMES utf8;
+
+USE `testdb`;
+
+DROP TABLE IF EXISTS `people`;
+CREATE TABLE `people` (
+  `name` VARCHAR(40) NOT NULL,
+  `surname` VARCHAR(60) NOT NULL,
+  `age` TINYINT UNSIGNED NOT NULL,
+  `created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated` DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  `remark` VARCHAR(80),
+  `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `people` (`name`, `surname`, `age`) VALUES ('Robin', 'Shark', 35);
+INSERT INTO `people` (`name`, `surname`, `age`) VALUES ('Linda', 'Morwin', 28);
+INSERT INTO `people` (`name`, `surname`, `age`) VALUES ('Patrick', 'Woody', 51);
+INSERT INTO `people` (`name`, `surname`, `age`) VALUES ('Aneta', 'White', 17);
+INSERT INTO `people` (`name`, `surname`, `age`) VALUES ('Roger', 'Hover', 29);
+```
+
 ## Versions
 Now in August 2020 I have the computer with **Windows 10 Pro 64bit**, **12GB RAM** and available **50GB free HDD space**
 
