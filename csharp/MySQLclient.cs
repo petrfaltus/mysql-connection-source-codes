@@ -11,6 +11,10 @@ public class MySQLclient
 
     private const string db_table = "people";
 
+    private const string db_column = "id";
+    private const string db_column_variable = "@var";
+    private const int db_column_value = 1;
+
     public static void Main(string[] args)
     {
         // Build the connection string
@@ -86,6 +90,17 @@ public class MySQLclient
                         }
                     }
 
+                Console.WriteLine();
+
+                // SELECT WHERE statement
+                string sql2 = String.Format("select count(*) from {0} where {1}!={2}", db_table, db_column, db_column_variable);
+                using (var cmd = new MySqlCommand(sql2, conn))
+                {
+                    cmd.Parameters.AddWithValue(db_column_variable, db_column_value);
+
+                    Object result = cmd.ExecuteScalar();
+                    Console.WriteLine("Result: {0}", result);
+                }
             }
         }
         catch (MySqlException mex)
