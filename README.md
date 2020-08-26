@@ -107,6 +107,23 @@ The subdirectory `csharp` contains prepared Windows batches:
 - `02-run.cmd` - runs the Windows executable
 - `03-clean.cmd` - deletes the Windows executable
 
+### 6. The PHP client source code
+- install [PHP] on your computer
+- set the OS environment `%PHP_HOME%` variable (must exist `"%PHP_HOME%\php.exe"`)
+
+To the `php.ini` in the PHP directory `%PHP_HOME%` add lines
+```
+[PHP]
+extension_dir = "ext"
+extension=pdo_mysql
+
+[Date]
+date.timezone = Europe/Prague
+```
+
+The subdirectory `php` contains prepared Windows batch:
+- `01-run.cmd` - runs the code through the PHP interpreter
+
 ## Versions
 Now in August 2020 I have the computer with **Windows 10 Pro 64bit**, **12GB RAM** and available **50GB free HDD space**
 
@@ -120,6 +137,7 @@ Now in August 2020 I have the computer with **Windows 10 Pro 64bit**, **12GB RAM
 | [Apache Maven] | 3.6.3 | |
 | [Gradle Build Tool] | 6.3 | |
 | [MySQL Connector/NET] | 8.0.20.0 | |
+| [PHP] | 7.4.4 | 7.4.4-nts-Win32-vc15-x64 |
 
 ## To do (my plans to the future)
 
@@ -132,3 +150,4 @@ Now in August 2020 I have the computer with **Windows 10 Pro 64bit**, **12GB RAM
 [Apache Maven]: <https://maven.apache.org/>
 [Gradle Build Tool]: <https://gradle.org/>
 [MySQL Connector/NET]: <https://dev.mysql.com/doc/connector-net/en/connector-net-introduction.html>
+[PHP]: <https://www.php.net/>
