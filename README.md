@@ -75,6 +75,19 @@ INSERT INTO `people` (`name`, `surname`, `age`) VALUES ('Aneta', 'White', 17);
 INSERT INTO `people` (`name`, `surname`, `age`) VALUES ('Roger', 'Hover', 29);
 ```
 
+### 4. The Java client source code
+- install [Java JDK] on your computer
+- set the OS environment `%JAVA_HOME%` variable (must exist `"%JAVA_HOME%\bin\java.exe"`)
+
+#### 4.1. Apache Maven
+- install [Apache Maven] on your computer
+- add the Maven directory (where the batch `mvn.cmd` locates) to the OS environment `%PATH%` variable
+
+The subdirectory `java-maven` contains prepared Windows batches:
+- `01-build.cmd` - cleans, compiles and builds the Maven project
+- `02-run.cmd` - runs the built Java archive (JAR)
+- `03-clean.cmd` - cleans the Maven project
+
 ## Versions
 Now in August 2020 I have the computer with **Windows 10 Pro 64bit**, **12GB RAM** and available **50GB free HDD space**
 
@@ -84,6 +97,8 @@ Now in August 2020 I have the computer with **Windows 10 Pro 64bit**, **12GB RAM
 | [docker desktop] | 2.3.0.4 (46911) stable | 2 CPUs, 3GB memory, 1GB swap, 48GB disc image size |
 | [MySQL image] | 5.7.30 | default password for root: R00tPa33w0rd! |
 | [Adminer image] | 4.7.7-standalone | |
+| [Java JDK] | 14.0.1 | Java(TM) SE Runtime Environment (build 14.0.1+7) |
+| [Apache Maven] | 3.6.3 | |
 
 ## To do (my plans to the future)
 
@@ -92,3 +107,5 @@ Now in August 2020 I have the computer with **Windows 10 Pro 64bit**, **12GB RAM
 [docker desktop]: <https://docs.docker.com/desktop/>
 [MySQL image]: <https://hub.docker.com/_/mysql>
 [Adminer image]: <https://hub.docker.com/_/adminer>
+[Java JDK]: <https://www.oracle.com/java/technologies/javase-downloads.html>
+[Apache Maven]: <https://maven.apache.org/>
