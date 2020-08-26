@@ -1,0 +1,28 @@
+repositories {
+   mavenCentral()
+}
+
+apply plugin: 'java'
+
+version = '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+   options.encoding = 'UTF-8'
+}
+
+dependencies {
+   implementation 'mysql:mysql-connector-java:8.0.20'
+}
+
+jar {
+   manifest {
+      attributes 'Main-Class': 'cz.petrfaltus.mysql.Program'
+   }
+
+   from {
+      configurations.compileClasspath.collect {
+         it.isDirectory() ? it : zipTree(it)
+      }
+   }
+}
