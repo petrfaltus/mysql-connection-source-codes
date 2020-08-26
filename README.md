@@ -14,7 +14,7 @@ Small example console source codes how to connect to the MySQL, how to update ro
 - clone this repository to your computer by the GIT command
   `git clone https://github.com/petrfaltus/mysql-connection-source-codes.git`
 
-### 2. Installation of the Oracle database (as a Docker container)
+### 2. Installation of the MySQL (as a Docker container)
 - install [docker desktop] on your computer
 - refer the [MySQL image]
 - refer the [Adminer image]
@@ -97,6 +97,16 @@ The subdirectory `java-gradle` contains prepared Windows batches:
 - `02-run.cmd` - runs the built Java archive (JAR)
 - `03-clean.cmd` - cleans the Gradle project
 
+### 5. The .NET C# client source code
+- use the `csc.exe` .NET C# compiler that is the part of Microsoft .NET Framework (part of OS)
+- install [MySQL Connector/NET] on your computer
+- check the right `MySql.Data.dll` from [MySQL Connector/NET] in the `csharp\bin` directory
+
+The subdirectory `csharp` contains prepared Windows batches:
+- `01-compile.cmd` - compiles the source code (contains the path definition to the `csc.exe` compiler)
+- `02-run.cmd` - runs the Windows executable
+- `03-clean.cmd` - deletes the Windows executable
+
 ## Versions
 Now in August 2020 I have the computer with **Windows 10 Pro 64bit**, **12GB RAM** and available **50GB free HDD space**
 
@@ -109,6 +119,7 @@ Now in August 2020 I have the computer with **Windows 10 Pro 64bit**, **12GB RAM
 | [Java JDK] | 14.0.1 | Java(TM) SE Runtime Environment (build 14.0.1+7) |
 | [Apache Maven] | 3.6.3 | |
 | [Gradle Build Tool] | 6.3 | |
+| [MySQL Connector/NET] | 8.0.20.0 | |
 
 ## To do (my plans to the future)
 
@@ -120,3 +131,4 @@ Now in August 2020 I have the computer with **Windows 10 Pro 64bit**, **12GB RAM
 [Java JDK]: <https://www.oracle.com/java/technologies/javase-downloads.html>
 [Apache Maven]: <https://maven.apache.org/>
 [Gradle Build Tool]: <https://gradle.org/>
+[MySQL Connector/NET]: <https://dev.mysql.com/doc/connector-net/en/connector-net-introduction.html>
