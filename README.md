@@ -73,6 +73,35 @@ INSERT INTO `people` (`name`, `surname`, `age`) VALUES ('Linda', 'Morwin', 28);
 INSERT INTO `people` (`name`, `surname`, `age`) VALUES ('Patrick', 'Woody', 51);
 INSERT INTO `people` (`name`, `surname`, `age`) VALUES ('Aneta', 'White', 17);
 INSERT INTO `people` (`name`, `surname`, `age`) VALUES ('Roger', 'Hover', 29);
+
+DROP FUNCTION IF EXISTS `factorial`;
+DELIMITER $$
+CREATE FUNCTION `factorial`(`n` INT) RETURNS INT DETERMINISTIC
+BEGIN
+  DECLARE `result` INT DEFAULT 1;
+  DECLARE `ijk` INT DEFAULT 2;
+  IF `n` < 0 THEN
+    RETURN -1;
+  END IF;
+  IF `n` < 2 THEN
+    RETURN `result`;
+  END IF;
+  WHILE `ijk` <= `n` DO
+    SET `result` = `result` * `ijk`;
+    SET `ijk` = `ijk` + 1;
+  END WHILE;
+  RETURN `result`;
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `add_and_subtract`;
+DELIMITER $$
+CREATE PROCEDURE `add_and_subtract`(`a` INT, `b` INT, OUT `x` INT, OUT `y` INT)
+BEGIN
+  SET `x` = `a` + `b`;
+  SET `y` = `a` - `b`;
+END$$
+DELIMITER ;
 ```
 
 ### 4. The Java client source code
