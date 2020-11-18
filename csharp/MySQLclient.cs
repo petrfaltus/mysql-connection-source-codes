@@ -18,6 +18,9 @@ public class MySQLclient
     private const string db_column_variable = "@var";
     private const int db_column_value = 1;
 
+    private const string db_factorial_variable = "@n";
+    private const int db_factorial_value = 4;
+
     private static string GetNow()
     {
         DateTime dateTimeNow = DateTime.Now;
@@ -121,6 +124,18 @@ public class MySQLclient
                 using (var cmd = new MySqlCommand(sql2, conn))
                 {
                     cmd.Parameters.AddWithValue(db_column_variable, db_column_value);
+
+                    Object result = cmd.ExecuteScalar();
+                    Console.WriteLine("Result: {0}", result);
+                }
+
+                Console.WriteLine();
+
+                // SELECT function statement
+                string sql3 = String.Format("select factorial({0})", db_factorial_variable);
+                using (var cmd = new MySqlCommand(sql3, conn))
+                {
+                    cmd.Parameters.AddWithValue(db_factorial_variable, db_factorial_value);
 
                     Object result = cmd.ExecuteScalar();
                     Console.WriteLine("Result: {0}", result);
