@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using MySql.Data.MySqlClient;
 
 public class MySQLclient
@@ -20,6 +21,14 @@ public class MySQLclient
 
     private const string db_factorial_variable = "@n";
     private const int db_factorial_value = 4;
+
+    private const string db_add_and_subtract_a_variable = "@a";
+    private const int db_add_and_subtract_a_value = 12;
+    private const string db_add_and_subtract_b_variable = "@b";
+    private const int db_add_and_subtract_b_value = 5;
+
+    private const string db_add_and_subtract_x_variable = "@x";
+    private const string db_add_and_subtract_y_variable = "@y";
 
     private static string GetNow()
     {
@@ -139,6 +148,28 @@ public class MySQLclient
 
                     Object result = cmd.ExecuteScalar();
                     Console.WriteLine("Result: {0}", result);
+                }
+
+                Console.WriteLine();
+
+                // CALL procedure statement
+                string sql4 = String.Format("add_and_subtract");
+                using (var cmd = new MySqlCommand(sql4, conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue(db_add_and_subtract_a_variable, db_add_and_subtract_a_value);
+                    cmd.Parameters.AddWithValue(db_add_and_subtract_b_variable, db_add_and_subtract_b_value);
+                    MySqlParameter par3 = new MySqlParameter(db_add_and_subtract_x_variable, MySqlDbType.Int32);
+                    par3.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(par3);
+                    MySqlParameter par4 = new MySqlParameter(db_add_and_subtract_y_variable, MySqlDbType.Int32);
+                    par4.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(par4);
+
+                    cmd.ExecuteNonQuery();
+                    Console.WriteLine("Result x: {0}", cmd.Parameters[db_add_and_subtract_x_variable].Value);
+                    Console.WriteLine("Result y: {0}", cmd.Parameters[db_add_and_subtract_y_variable].Value);
                 }
             }
         }
