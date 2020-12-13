@@ -26,6 +26,17 @@ $db_column = "id";
 $db_column_variable = ":var";
 $db_column_value = 1;
 
+$db_factorial_variable = ":n";
+$db_factorial_value = 4;
+
+$db_add_and_subtract_a_variable = ":a";
+$db_add_and_subtract_a_value = 12;
+$db_add_and_subtract_b_variable = ":b";
+$db_add_and_subtract_b_value = 5;
+
+$db_add_and_subtract_x_env_variable = "@x";
+$db_add_and_subtract_y_env_variable = "@y";
+
 $availableDrivers = PDO::getAvailableDrivers();
 
 echo "Available PDO drivers ";
@@ -90,8 +101,51 @@ try
      print_r($stm2->errorInfo());
    else
      print_r($lines2);
+   echo PHP_EOL;
 
    $stm2 = null;
+
+   // SELECT function statement
+   $stm3 = $conn->prepare("select factorial(".$db_factorial_variable.")");
+   $stm3->bindParam($db_factorial_variable, $db_factorial_value, PDO::PARAM_INT);
+   $stm3->execute();
+   echo "Total columns: ".$stm3->columnCount().PHP_EOL;
+
+   echo "Fetch all rows ";
+   $lines3 = $stm3->fetchAll(PDO::FETCH_ASSOC);
+   if ($lines3 == false)
+     print_r($stm3->errorInfo());
+   else
+     print_r($lines3);
+   echo PHP_EOL;
+
+   $stm3 = null;
+
+   // CALL procedure statement
+   $stm4 = $conn->prepare("call add_and_subtract(".$db_add_and_subtract_a_variable.", ".$db_add_and_subtract_b_variable.", ".$db_add_and_subtract_x_env_variable.", ".$db_add_and_subtract_y_env_variable.")");
+   $stm4->bindParam($db_add_and_subtract_a_variable, $db_add_and_subtract_a_value, PDO::PARAM_INT);
+   $stm4->bindParam($db_add_and_subtract_b_variable, $db_add_and_subtract_b_value, PDO::PARAM_INT);
+   $stm4->execute();
+
+   $stm4error = $stm4->errorInfo();
+   if ((isset($stm4error[0])) and ($stm4error[0] === "00000"))
+     {
+      $stm4b = $conn->prepare("select ".$db_add_and_subtract_x_env_variable.", ".$db_add_and_subtract_y_env_variable);
+      $stm4b->execute();
+      echo "Total columns: ".$stm4b->columnCount().PHP_EOL;
+
+      echo "Fetch all rows ";
+      $lines4b = $stm4b->fetchAll(PDO::FETCH_ASSOC);
+      if ($lines4b == false)
+        print_r($stm4b->errorInfo());
+      else
+        print_r($lines4b);
+      echo PHP_EOL;
+     }
+   else
+     print_r($stm4error);
+
+   $stm4 = null;
 
    // Disconnect the database
    $conn = null;
