@@ -120,7 +120,7 @@ SELECT `factorial`(3);
 SELECT `factorial`(4);
 
 CALL `add_and_subtract`(12, 5, @env_var_x, @env_var_y);
-select @env_var_x, @env_var_y;
+SELECT @env_var_x, @env_var_y;
 ```
 
 ### 4. The Java client source code
