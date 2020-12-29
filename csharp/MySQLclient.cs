@@ -64,6 +64,8 @@ public class MySQLclient
                 string new_comment = "C# " + GetNow();
 
                 string sql0 = String.Format("update {0} set {1}={2} where {3}!={4}", db_table, db_update_column, db_update_column_variable, db_column, db_column_variable);
+                Console.WriteLine(sql0);
+
                 using (var cmd = new MySqlCommand(sql0, conn))
                 {
                     cmd.Parameters.AddWithValue(db_update_column_variable, new_comment);
@@ -77,6 +79,8 @@ public class MySQLclient
 
                 // Full SELECT statement
                 string sql1 = String.Format("select * from {0}", db_table);
+                Console.WriteLine(sql1);
+
                 using (var cmd = new MySqlCommand(sql1, conn))
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -130,6 +134,8 @@ public class MySQLclient
 
                 // SELECT WHERE statement
                 string sql2 = String.Format("select count(*) from {0} where {1}!={2}", db_table, db_column, db_column_variable);
+                Console.WriteLine(sql2);
+
                 using (var cmd = new MySqlCommand(sql2, conn))
                 {
                     cmd.Parameters.AddWithValue(db_column_variable, db_column_value);
@@ -142,6 +148,8 @@ public class MySQLclient
 
                 // SELECT function statement
                 string sql3 = String.Format("select factorial({0})", db_factorial_variable);
+                Console.WriteLine(sql3);
+
                 using (var cmd = new MySqlCommand(sql3, conn))
                 {
                     cmd.Parameters.AddWithValue(db_factorial_variable, db_factorial_value);
@@ -154,6 +162,8 @@ public class MySQLclient
 
                 // CALL procedure statement
                 string sql4 = String.Format("add_and_subtract");
+                Console.WriteLine(sql4);
+
                 using (var cmd = new MySqlCommand(sql4, conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
