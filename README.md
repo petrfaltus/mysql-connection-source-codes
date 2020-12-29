@@ -104,6 +104,25 @@ END$$
 DELIMITER ;
 ```
 
+#### optional SQL check lines for testuser
+```sql
+SET NAMES utf8;
+
+USE `testdb`;
+
+SELECT * FROM `people`;
+
+SELECT count(*) FROM `people`;
+SELECT count(*) FROM `people` WHERE `id`!=1;
+
+SELECT `factorial`(2);
+SELECT `factorial`(3);
+SELECT `factorial`(4);
+
+CALL `add_and_subtract`(12, 5, @env_var_x, @env_var_y);
+select @env_var_x, @env_var_y;
+```
+
 ### 4. The Java client source code
 - install [Java JDK] on your computer
 - set the OS environment `%JAVA_HOME%` variable (must exist `"%JAVA_HOME%\bin\java.exe"`)
