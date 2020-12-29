@@ -34,8 +34,8 @@ $db_add_and_subtract_a_value = 12;
 $db_add_and_subtract_b_variable = ":b";
 $db_add_and_subtract_b_value = 5;
 
-$db_add_and_subtract_x_env_variable = "@x";
-$db_add_and_subtract_y_env_variable = "@y";
+$db_add_and_subtract_x_env_variable = "@env_var_x";
+$db_add_and_subtract_y_env_variable = "@env_var_y";
 
 $availableDrivers = PDO::getAvailableDrivers();
 
@@ -65,7 +65,10 @@ try
    // UPDATE statement
    $new_comment = "PHP ".date("j.n.Y H:i:s");
 
-   $stm0 = $conn->prepare("update ".$db_table." set ".$db_update_column."=".$db_update_column_variable." where ".$db_column."!=".$db_column_variable);
+   $stm0query = "update ".$db_table." set ".$db_update_column."=".$db_update_column_variable." where ".$db_column."!=".$db_column_variable;
+   echo $stm0query.PHP_EOL;
+
+   $stm0 = $conn->prepare($stm0query);
    $stm0->bindParam($db_update_column_variable, $new_comment, PDO::PARAM_STR);
    $stm0->bindParam($db_column_variable, $db_column_value, PDO::PARAM_INT);
    $stm0->execute();
@@ -75,7 +78,10 @@ try
    $stm0 = null;
 
    // Full SELECT statement
-   $stm1 = $conn->prepare("select * from ".$db_table);
+   $stm1query = "select * from ".$db_table;
+   echo $stm1query.PHP_EOL;
+
+   $stm1 = $conn->prepare($stm1query);
    $stm1->execute();
    echo "Total columns x rows: ".$stm1->columnCount()." x ".$stm1->rowCount().PHP_EOL;
 
@@ -90,7 +96,10 @@ try
    $stm1 = null;
 
    // SELECT WHERE statement
-   $stm2 = $conn->prepare("select count(*) from ".$db_table." where ".$db_column."!=".$db_column_variable);
+   $stm2query = "select count(*) from ".$db_table." where ".$db_column."!=".$db_column_variable;
+   echo $stm2query.PHP_EOL;
+
+   $stm2 = $conn->prepare($stm2query);
    $stm2->bindParam($db_column_variable, $db_column_value, PDO::PARAM_INT);
    $stm2->execute();
    echo "Total columns x rows: ".$stm2->columnCount()." x ".$stm2->rowCount().PHP_EOL;
@@ -106,7 +115,10 @@ try
    $stm2 = null;
 
    // SELECT function statement
-   $stm3 = $conn->prepare("select factorial(".$db_factorial_variable.")");
+   $stm3query = "select factorial(".$db_factorial_variable.")";
+   echo $stm3query.PHP_EOL;
+
+   $stm3 = $conn->prepare($stm3query);
    $stm3->bindParam($db_factorial_variable, $db_factorial_value, PDO::PARAM_INT);
    $stm3->execute();
    echo "Total columns: ".$stm3->columnCount().PHP_EOL;
@@ -122,7 +134,10 @@ try
    $stm3 = null;
 
    // CALL procedure statement
-   $stm4 = $conn->prepare("call add_and_subtract(".$db_add_and_subtract_a_variable.", ".$db_add_and_subtract_b_variable.", ".$db_add_and_subtract_x_env_variable.", ".$db_add_and_subtract_y_env_variable.")");
+   $stm4query = "call add_and_subtract(".$db_add_and_subtract_a_variable.", ".$db_add_and_subtract_b_variable.", ".$db_add_and_subtract_x_env_variable.", ".$db_add_and_subtract_y_env_variable.")";
+   echo $stm4query.PHP_EOL;
+
+   $stm4 = $conn->prepare($stm4query);
    $stm4->bindParam($db_add_and_subtract_a_variable, $db_add_and_subtract_a_value, PDO::PARAM_INT);
    $stm4->bindParam($db_add_and_subtract_b_variable, $db_add_and_subtract_b_value, PDO::PARAM_INT);
    $stm4->execute();
@@ -130,7 +145,10 @@ try
    $stm4error = $stm4->errorInfo();
    if ((isset($stm4error[0])) and ($stm4error[0] === "00000"))
      {
-      $stm4b = $conn->prepare("select ".$db_add_and_subtract_x_env_variable.", ".$db_add_and_subtract_y_env_variable);
+      $stm4bQuery = "select ".$db_add_and_subtract_x_env_variable.", ".$db_add_and_subtract_y_env_variable;
+      echo $stm4bQuery.PHP_EOL;
+
+      $stm4b = $conn->prepare($stm4bQuery);
       $stm4b->execute();
       echo "Total columns: ".$stm4b->columnCount().PHP_EOL;
 
