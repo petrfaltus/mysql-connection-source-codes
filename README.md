@@ -190,7 +190,7 @@ Now in August 2020 I have the computer with **Windows 10 Pro 64bit**, **12GB RAM
 ## To do (my plans to the future)
 
 
-[GIT]: <https://git-scm.com>
+[GIT]: <https://git-scm.com/>
 [docker desktop]: <https://docs.docker.com/desktop/>
 [MySQL image]: <https://hub.docker.com/_/mysql>
 [Adminer image]: <https://hub.docker.com/_/adminer>
